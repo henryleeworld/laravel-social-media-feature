@@ -26,5 +26,5 @@ $ php artisan migrate --seed
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/9OgaMAf.png)
+![](https://i.imgur.com/bFiv0jb.png)
 > 使用特徵機制和契約（定義了框架核心服務的介面）來實現
