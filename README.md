@@ -1,4 +1,4 @@
-# Laravel 7 社交媒體特色
+# Laravel 8 社交媒體特色
 
 引入 rennokki 的 befriended 套件來擴增實作類似社交媒體的功能，例如根據追蹤或封鎖的模型來進行追蹤、封鎖和過濾內容，可以更好地控制用戶可以看到和看不到的內容。
 
@@ -21,7 +21,7 @@ $ php artisan key:generate
 $ php artisan migrate --seed
 ```
 - 在瀏覽器中輸入已定義的路由 URL 來訪問，例如：http://127.0.0.1:8000。
-- 你可以經由 `/` 來進行社交媒體操作。
+- 你可以經由 `/social-media` 來進行社交媒體操作。
 
 ----
 
