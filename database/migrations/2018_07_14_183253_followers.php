@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Followers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,11 @@ class Followers extends Migration
     public function up()
     {
         Schema::create('followers', function (Blueprint $table) {
-            $table->increments('id');
-
+            $table->id();
             $table->integer('followable_id');
             $table->string('followable_type');
-
             $table->integer('follower_id')->nullable();
             $table->string('follower_type')->nullable();
-
             $table->timestamps();
         });
     }
@@ -35,4 +32,4 @@ class Followers extends Migration
     {
         Schema::dropIfExists('followers');
     }
-}
+};

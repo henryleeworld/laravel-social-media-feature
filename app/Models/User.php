@@ -2,32 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Rennokki\Befriended\Contracts\Blocking;
 use Rennokki\Befriended\Contracts\Following;
 use Rennokki\Befriended\Contracts\Liking;
-use Rennokki\Befriended\Scopes\BlockFilterable;
 use Rennokki\Befriended\Scopes\FollowFilterable;
-use Rennokki\Befriended\Scopes\LikeFilterable;
-use Rennokki\Befriended\Traits\CanBeBlocked;
-use Rennokki\Befriended\Traits\CanBeFollowed;
-use Rennokki\Befriended\Traits\CanBeLiked;
-use Rennokki\Befriended\Traits\CanBlock;
-use Rennokki\Befriended\Traits\CanFollow;
-use Rennokki\Befriended\Traits\CanLike;
+use Rennokki\Befriended\Traits\Block;
+use Rennokki\Befriended\Traits\Follow;
+use Rennokki\Befriended\Traits\Like;
 
-class User extends Authenticatable implements Following, Blocking, Liking
+class User extends Authenticatable implements Blocking, Following, Liking
 {
-    use BlockFilterable, CanFollow, CanBeFollowed, CanBlock, CanBeBlocked, CanLike, CanBeLiked,
-    LikeFilterable, FollowFilterable, HasFactory, Notifiable;
+    use Block, Follow, FollowFilterable, HasApiTokens, HasFactory, Like, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -36,9 +31,9 @@ class User extends Authenticatable implements Following, Blocking, Liking
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -46,11 +41,12 @@ class User extends Authenticatable implements Following, Blocking, Liking
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 }
